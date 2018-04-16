@@ -3,7 +3,9 @@
 require 'test_helper'
 
 class GenericJob::Test < ActiveSupport::TestCase
-  test 'truth' do
-    assert_kind_of Module, GenericJob
+  test "async calling model's method" do
+    GenericJob.set(queue: :default)
+              .perform_now users(:joe_doe), 'fetch_twitter!'
+    assert_equal '@joe_doe', users(:joe_doe).twitter
   end
 end

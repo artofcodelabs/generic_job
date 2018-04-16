@@ -1,5 +1,7 @@
 AllCops:
   TargetRubyVersion: 2.5
+  Exclude:
+    - test/dummy/db/schema.rb
 
 Metrics/LineLength:
   Enabled: true
@@ -16,6 +18,11 @@ Metrics/LineLength:
 Rails:
   Enabled: true
 
+Rails/ApplicationJob:
+  Enabled: true
+  Exclude:
+    - lib/generic_job.rb
+
 Style/ClassAndModuleChildren:
   Enabled: true
   Exclude:
@@ -29,6 +36,9 @@ Style/FrozenStringLiteralComment:
   Exclude:
     - bin/rails
     - test/dummy/bin/*
+
+Style/MethodDefParentheses:
+  Enabled: false
 
 Style/MixinUsage:
   Enabled: true
