@@ -20,6 +20,14 @@ class GenericJob::Test < ActiveSupport::TestCase
     assert_equal 'joedoe@gmail.com', users(:joe_doe).email
   end
 
+  test "async model's instance method call with an argument" do
+    GenericJob.set(queue: :default)
+              .perform_now users(:joe_doe), meth: 'fetch_twitter!',
+                                            arg: { only_name: true }
+    assert_equal '@joe_doe', users(:joe_doe).twitter
+    assert_nil users(:joe_doe).email
+  end
+
   test "async PORO's instance method call with an argument" do
     args = {
       class: 'TwitterFetcher',
