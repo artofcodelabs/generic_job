@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 class GenericJob < ActiveJob::Base
-  def perform obj, meth
-    unless obj.is_a? Hash
-      handle_passed_obj obj, meth
-      return
-    end
-    obj.symbolize_keys!
-    if obj[:meth_args]
-      init_obj(obj).send meth, obj[:meth_args]
+  def perform obj_or_hash, meth
+    case obj_or_hash
+    when Hash
+      handle_passed_hash obj_or_hash.symbolize_keys, meth
     else
-      init_obj(obj).send meth
+      handle_passed_obj obj_or_hash, meth
     end
   end
 
@@ -18,6 +14,14 @@ class GenericJob < ActiveJob::Base
 
     def init_obj hash
       hash[:class].constantize.new hash[:init_args]
+    end
+
+    def handle_passed_hash hash, meth
+      if hash[:meth_args]
+        init_obj(hash).send meth, hash[:meth_args]
+      else
+        init_obj(hash).send meth
+      end
     end
 
     def handle_passed_obj obj, data
