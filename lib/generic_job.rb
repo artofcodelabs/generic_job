@@ -16,16 +16,16 @@ class GenericJob < ActiveJob::Base
 
   private
 
-  def init_obj hash
-    hash[:class].constantize.new hash[:init_args]
-  end
-
-  def handle_passed_obj obj, data
-    case data
-    when String
-      obj.send data
-    when Hash
-      obj.send data[:meth], data[:arg]
+    def init_obj hash
+      hash[:class].constantize.new hash[:init_args]
     end
-  end
+
+    def handle_passed_obj obj, data
+      case data
+      when String
+        obj.send data
+      when Hash
+        obj.send data[:meth], data[:arg]
+      end
+    end
 end

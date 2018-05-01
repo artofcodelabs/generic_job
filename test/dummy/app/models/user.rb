@@ -4,6 +4,6 @@ class User < ApplicationRecord
   validates :full_name, presence: true
 
   def fetch_twitter!
-    update twitter: '@' + full_name.downcase.split(' ').join('_')
+    TwitterFetcher.new(user: self).fetch
   end
 end

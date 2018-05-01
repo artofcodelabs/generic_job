@@ -3,6 +3,10 @@ AllCops:
   Exclude:
     - test/dummy/db/schema.rb
 
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: rails
+
 Metrics/LineLength:
   Enabled: true
   Exclude:
