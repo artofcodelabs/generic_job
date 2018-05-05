@@ -2,26 +2,32 @@
 
 class GenericJob
   module Perform
-    def perform obj_or_hash, meth
-      case obj_or_hash
+    def perform receiver, data
+      case receiver
       when Hash
-        handle_passed_hash obj_or_hash.symbolize_keys, meth
+        handle_passed_hash receiver.symbolize_keys, data
+      when String
+        handle_passed_obj receiver.constantize, data
       else
-        handle_passed_obj obj_or_hash, meth
+        handle_passed_obj receiver, data
       end
     end
 
     private
 
-      def init_obj hash
-        hash[:class].constantize.new(*to_array(hash[:init_args]))
+      def fetch_receiver hash
+        if hash[:init_args]
+          hash[:class].constantize.new(*to_array(hash[:init_args]))
+        else
+          hash[:class].constantize
+        end
       end
 
       def handle_passed_hash hash, meth
         if hash[:meth_args]
-          init_obj(hash).send meth, *to_array(hash[:meth_args])
+          fetch_receiver(hash).send meth, *to_array(hash[:meth_args])
         else
-          init_obj(hash).send meth
+          fetch_receiver(hash).send meth
         end
       end
 

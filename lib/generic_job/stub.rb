@@ -37,27 +37,24 @@ class GenericJob
 
       def call_missing_method name, *args
         if @init_args
-          initialize_and_call_missing_method name, *args
+          GenericJob.set(@opts).perform_later receiver_as_hash(args), name
         else
-          call_missing_instance_method name, *args
+          GenericJob.set(@opts)
+                    .perform_later prepare_receiver, meth: name, args: args
         end
       end
 
-      def call_missing_instance_method name, *args
-        if args.any?
-          GenericJob.set(@opts).perform_later @receiver, meth: name, args: args
-        else
-          GenericJob.set(@opts).perform_later @receiver, name
-        end
-      end
-
-      def initialize_and_call_missing_method name, *args
-        gj_args = {
+      def receiver_as_hash args
+        {
           class: @receiver.name,
           init_args: @init_args,
           meth_args: args
         }
-        GenericJob.set(@opts).perform_later gj_args, name
+      end
+
+      def prepare_receiver
+        return @receiver unless @receiver.is_a? Class
+        @receiver.name
       end
   end
 end
