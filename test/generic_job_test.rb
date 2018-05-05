@@ -3,10 +3,20 @@
 require 'test_helper'
 
 class GenericJob::Test < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   test "async model's instance method call" do
     GenericJob.set(queue: :default)
               .perform_now users(:joe_doe), 'fetch_twitter!'
     assert_equal '@joe_doe', users(:joe_doe).twitter
+    assert_equal 'joedoe@gmail.com', users(:joe_doe).email
+  end
+
+  test "async model's instance method call using higher lvl syntax" do
+    perform_enqueued_jobs do
+      users(:joe_doe).async(queue: :default).fetch_twitter!
+    end
+    assert_equal '@joe_doe', users(:joe_doe).reload.twitter
     assert_equal 'joedoe@gmail.com', users(:joe_doe).email
   end
 

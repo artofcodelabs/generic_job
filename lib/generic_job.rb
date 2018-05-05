@@ -33,3 +33,6 @@ class GenericJob < ActiveJob::Base
       end
     end
 end
+
+require 'generic_job/stub'
+require 'generic_job/async'
