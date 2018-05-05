@@ -30,7 +30,7 @@ Rails/ApplicationJob:
 Style/ClassAndModuleChildren:
   Enabled: true
   Exclude:
-    - test/generic_job_test.rb
+    - test/**/*
 
 Style/Documentation:
   Enabled: false
