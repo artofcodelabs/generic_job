@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class TwitterFetcher
+  include GenericJob::Async
+
   def initialize user: nil, user_id: nil
     @user = user
     @user ||= User.find user_id

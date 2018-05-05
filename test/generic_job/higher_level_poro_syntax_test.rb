@@ -2,24 +2,14 @@
 
 require 'test_helper'
 
-class GenericJob::HigherLevelModelSyntaxTest < ActiveSupport::TestCase
+class GenericJob::HigherLevelPoroSyntaxTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
-
-  test 'default queue' do
-    assert_enqueued_with(queue: 'default') do
-      users(:joe_doe).async.fetch_twitter!
-    end
-  end
-
-  test 'setting up queue' do
-    assert_enqueued_with(queue: 'low') do
-      users(:joe_doe).async(queue: 'low').fetch_twitter!
-    end
-  end
 
   test 'async instance method call' do
     perform_enqueued_jobs do
-      users(:joe_doe).async.fetch_twitter!
+      TwitterFetcher.async(queue: :default)
+                    .async_new(user_id: users(:joe_doe).id)
+                    .fetch
     end
     assert_equal '@joe_doe', users(:joe_doe).reload.twitter
     assert_equal 'joedoe@gmail.com', users(:joe_doe).email
@@ -27,7 +17,9 @@ class GenericJob::HigherLevelModelSyntaxTest < ActiveSupport::TestCase
 
   test 'async instance method call with an argument' do
     perform_enqueued_jobs do
-      users(:joe_doe).async.fetch_twitter! only_name: true
+      TwitterFetcher.async(queue: :default)
+                    .async_new(user_id: users(:joe_doe).id)
+                    .fetch skip_email: true
     end
     assert_equal '@joe_doe', users(:joe_doe).reload.twitter
     assert_nil users(:joe_doe).email
