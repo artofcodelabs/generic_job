@@ -17,4 +17,12 @@ class GenericJob::ModelSupportTest < ActiveSupport::TestCase
     assert_equal '@joe_doe', users(:joe_doe).twitter
     assert_nil users(:joe_doe).email
   end
+
+  test 'async instance method call with arguments' do
+    GenericJob.set(queue: :default)
+              .perform_now users(:joe_doe), meth: 'fetch_twitter!',
+                                            args: [{ only_name: true }]
+    assert_equal '@joe_doe', users(:joe_doe).twitter
+    assert_nil users(:joe_doe).email
+  end
 end

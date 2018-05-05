@@ -14,12 +14,12 @@ class GenericJob
     private
 
       def init_obj hash
-        hash[:class].constantize.new hash[:init_args]
+        hash[:class].constantize.new(*to_array(hash[:init_args]))
       end
 
       def handle_passed_hash hash, meth
         if hash[:meth_args]
-          init_obj(hash).send meth, hash[:meth_args]
+          init_obj(hash).send meth, *to_array(hash[:meth_args])
         else
           init_obj(hash).send meth
         end
@@ -30,8 +30,14 @@ class GenericJob
         when String
           obj.send data
         when Hash
-          obj.send data[:meth], data[:arg]
+          args = data[:args] || [data[:arg]]
+          obj.send data[:meth], *args
         end
+      end
+
+      def to_array args
+        return args if args.is_a? Array
+        [args]
       end
   end
 end

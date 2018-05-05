@@ -45,8 +45,7 @@ class GenericJob
 
       def call_missing_instance_method name, *args
         if args.any?
-          GenericJob.set(@opts).perform_later @receiver, meth: name,
-                                                         arg: args.first
+          GenericJob.set(@opts).perform_later @receiver, meth: name, args: args
         else
           GenericJob.set(@opts).perform_later @receiver, name
         end
@@ -55,8 +54,8 @@ class GenericJob
       def initialize_and_call_missing_method name, *args
         gj_args = {
           class: @receiver.name,
-          init_args: @init_args.first,
-          meth_args: args.first
+          init_args: @init_args,
+          meth_args: args
         }
         GenericJob.set(@opts).perform_later gj_args, name
       end
