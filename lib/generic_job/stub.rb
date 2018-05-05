@@ -11,9 +11,9 @@ class GenericJob
       receiver_has_method?(name) || super
     end
 
-    def method_missing name, *_args, &_block
+    def method_missing name, *args, &_block
       if receiver_has_method? name
-        GenericJob.set(@opts).perform_later @receiver, name.to_s
+        call_missing_method name.to_s, *args
       else
         super
       end
@@ -23,6 +23,15 @@ class GenericJob
 
       def receiver_has_method? name
         @receiver.respond_to? name
+      end
+
+      def call_missing_method name, *args
+        if args.any?
+          GenericJob.set(@opts).perform_later @receiver, meth: name,
+                                                         arg: args.first
+        else
+          GenericJob.set(@opts).perform_later @receiver, name
+        end
       end
   end
 end
