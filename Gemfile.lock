@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    generic_job (0.1.0)
+    generic_job (0.0.1)
       rails (>= 5.0, < 6.0)
 
 GEM
@@ -55,7 +55,7 @@ GEM
     erubi (1.7.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    i18n (1.0.0)
+    i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     loofah (2.2.2)
       crass (~> 1.0.2)
@@ -69,10 +69,10 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    nio4r (2.3.0)
+    nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
