@@ -20,7 +20,7 @@ class GenericJob
       end
     end
 
-    def async_new *args
+    def new *args
       @init_args = args
       self
     end

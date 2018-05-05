@@ -8,7 +8,7 @@ class GenericJob::HigherLevelPoroSyntaxTest < ActiveSupport::TestCase
   test 'async instance method call' do
     perform_enqueued_jobs do
       TwitterFetcher.async(queue: :default)
-                    .async_new(user_id: users(:joe_doe).id)
+                    .new(user_id: users(:joe_doe).id)
                     .fetch
     end
     assert_equal '@joe_doe', users(:joe_doe).reload.twitter
@@ -18,7 +18,7 @@ class GenericJob::HigherLevelPoroSyntaxTest < ActiveSupport::TestCase
   test 'async instance method call with an argument' do
     perform_enqueued_jobs do
       TwitterFetcher.async(queue: :default)
-                    .async_new(user_id: users(:joe_doe).id)
+                    .new(user_id: users(:joe_doe).id)
                     .fetch skip_email: true
     end
     assert_equal '@joe_doe', users(:joe_doe).reload.twitter
