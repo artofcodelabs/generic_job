@@ -5,12 +5,12 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'generic_job'
-  s.version     = '0.1.0'
+  s.version     = '0.0.1'
   s.authors     = ['Zbigniew Humeniuk']
   s.email       = ['hello@artofcode.co']
   s.homepage    = 'https://artofcode.co'
-  s.summary     = 'Summary of GenericJob.'
-  s.description = 'Description of GenericJob.'
+  s.summary     = 'Higher level abstraction on the top of ActiveJob.'
+  s.description = 'Run instance and class methods in the background jobs with ease.'
   s.license     = 'MIT'
 
   s.files = Dir[
