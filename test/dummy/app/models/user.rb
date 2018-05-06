@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :full_name, presence: true
 
   def self.fetch_twitter_for_all! opts = {}
-    all.each { |user| user.fetch_twitter! opts }
+    find_each { |user| user.fetch_twitter! opts }
   end
 
   def fetch_twitter! opts = {}
