@@ -82,7 +82,7 @@ TwitterFetcher.async(queue: :default)
 TwitterFetcher.async.fetch_for_all 'User', [12, 13], skip_email: true
 ```
 
-As you can see on the preceding examples - the usage of the `async` method is essential. This method calls `ActiveJob::Core`'s [**set** class method](http://api.rubyonrails.org/v5.0/classes/ActiveJob/Core/ClassMethods.html#method-i-set) under the hood, so you can pass to `async` method all the options that `set` supports.
+As you can see on the preceding examples - the usage of the `async` method is essential. This method calls `ActiveJob::Core`'s [**set** class method](http://api.rubyonrails.org/v5.0/classes/ActiveJob/Core/ClassMethods.html#method-i-set) under the hood, so you can pass to `async` method all the options that `set` supports. And remember that it is still `ActiveJob`, so passed method attributes must have serialized type.
 
 For more examples look inside the `test` directory. Both exemplary classes above are taken from the dummy test app as well.
 
