@@ -1,7 +1,10 @@
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
   Exclude:
     - test/dummy/db/schema.rb
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
 
 Layout/IndentationConsistency:
   Enabled: true
