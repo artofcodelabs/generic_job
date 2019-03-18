@@ -22,5 +22,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 5.0', '< 6.0'
 
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.3.6'
 end
