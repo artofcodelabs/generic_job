@@ -20,11 +20,13 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
+  s.required_ruby_version = '>= 2.6.0'
+
   s.add_dependency 'rails', '>= 5.0', '< 7.0'
 
   s.add_development_dependency 'listen', '>= 3.1.5', '< 3.2'
   s.add_development_dependency 'overcommit', '0.49.1'
-  s.add_development_dependency 'rubocop', '~> 0.74.0'
-  s.add_development_dependency 'rubocop-rails', '~> 2.3.1'
+  s.add_development_dependency 'rubocop', '~> 0.89'
+  s.add_development_dependency 'rubocop-rails', '~> 2.7'
   s.add_development_dependency 'sqlite3', '~> 1.4.1'
 end
