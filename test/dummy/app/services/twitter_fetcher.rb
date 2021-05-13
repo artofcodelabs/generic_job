@@ -24,13 +24,13 @@ class TwitterFetcher
 
     # simulation
     def fetch_name
-      name = '@' + @resource.full_name.downcase.split(' ').join('_')
+      name = "@#{@resource.full_name.downcase.split(' ').join('_')}"
       @resource.twitter = name
     end
 
     # simulation
     def fetch_email
-      email = @resource.full_name.downcase.split(' ').join + '@gmail.com'
+      email = "#{@resource.full_name.downcase.split(' ').join}@gmail.com"
       @resource.email = email
     end
 end
