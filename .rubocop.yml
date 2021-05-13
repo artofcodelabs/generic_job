@@ -19,7 +19,7 @@ Layout/SpaceInsideArrayLiteralBrackets:
   Exclude:
     - test/dummy/config/environments/production.rb
 
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: true
   Exclude:
     - generic_job.gemspec
