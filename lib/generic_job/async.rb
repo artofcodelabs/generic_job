@@ -5,12 +5,12 @@ class GenericJob
     extend ActiveSupport::Concern
 
     class_methods do
-      def async opts = {}
+      def async(opts = {})
         GenericJob::Stub.new self, opts
       end
     end
 
-    def async opts = {}
+    def async(opts = {})
       GenericJob::Stub.new self, opts
     end
   end
