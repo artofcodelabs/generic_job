@@ -21,7 +21,7 @@ class GenericJob
     end
 
     def new *args
-      @init_args = args
+      @init_args = args.first
       self
     end
 
@@ -29,7 +29,7 @@ class GenericJob
 
       def receiver_has_method? name
         if @init_args
-          @receiver.new(*@init_args).respond_to? name
+          @receiver.new(**@init_args).respond_to? name
         else
           @receiver.respond_to? name
         end

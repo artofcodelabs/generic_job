@@ -17,7 +17,7 @@ class GenericJob
 
       def fetch_receiver hash
         if hash[:init_args]
-          hash[:class].constantize.new(*to_array(hash[:init_args]))
+          hash[:class].constantize.new(**to_array(hash[:init_args]).first)
         else
           hash[:class].constantize
         end
