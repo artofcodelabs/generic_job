@@ -5,11 +5,11 @@ class User < ApplicationRecord
 
   validates :full_name, presence: true
 
-  def self.fetch_twitter_for_all! opts = {}
+  def self.fetch_twitter_for_all!(opts = {})
     find_each { |user| user.fetch_twitter! opts }
   end
 
-  def fetch_twitter! opts = {}
+  def fetch_twitter!(opts = {})
     TwitterFetcher.new(resource: self).fetch(
       skip_email: opts[:only_name]
     )
