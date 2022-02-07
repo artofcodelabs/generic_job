@@ -5,7 +5,7 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'generic_job'
-  s.version     = '0.1.0'
+  s.version     = '0.2.0'
   s.authors     = ['Zbigniew Humeniuk']
   s.email       = ['hello@artofcode.co']
   s.homepage    = 'https://artofcode.co'
@@ -20,11 +20,12 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
-  s.required_ruby_version = '>= 2.6.0'
+  s.required_ruby_version = '>= 2.7.0'
 
-  s.add_dependency 'rails', '>= 5.0', '< 7.0'
+  s.add_dependency 'rails', '>= 5.0', '< 8.0'
 
-  s.add_development_dependency 'rubocop', '~> 1.14'
-  s.add_development_dependency 'rubocop-rails', '~> 2.10'
-  s.add_development_dependency 'sqlite3', '~> 1.4.1'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-rails'
+  s.add_development_dependency 'sqlite3'
+  s.metadata['rubygems_mfa_required'] = 'true'
 end
