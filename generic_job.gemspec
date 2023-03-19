@@ -20,12 +20,12 @@ Gem::Specification.new do |s|
     'README.md'
   ]
 
-  s.required_ruby_version = '>= 2.7.0'
+  s.required_ruby_version = '>= 3.0.0'
 
   s.add_dependency 'rails', '>= 5.0', '< 8.0'
 
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rubocop-rails'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rubocop', '~> 1.48.1'
+  s.add_development_dependency 'rubocop-rails', '~> 2.18.0'
+  s.add_development_dependency 'sqlite3', '~> 1.6.1'
   s.metadata['rubygems_mfa_required'] = 'true'
 end
