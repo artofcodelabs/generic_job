@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    generic_job (0.2.0)
+    generic_job (0.2.1)
       rails (>= 5.0, < 8.0)
 
 GEM
